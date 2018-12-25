@@ -159,6 +159,7 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
       #####################
       #      Softmax      #
       #####################
+      print(stack)
       net = slim.conv2d(stack, num_classes, [1, 1], activation_fn=None, scope='logits')
       print(net)
       return net
