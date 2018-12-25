@@ -196,6 +196,7 @@ for epoch in range(args.epoch_start_i, args.num_epochs):
         # Do the training
         _,current=sess.run([opt,loss],feed_dict={net_input:input_image_batch,net_output:output_image_batch})
         current_losses.append(current)
+        loss = tf.Print(loss, [loss], message="loss")
         cnt = cnt + args.batch_size
         if cnt % 20 == 0:
             string_print = "Epoch = %d Count = %d Current_Loss = %.4f Time = %.2f"%(epoch,cnt,current,time.time()-st)
