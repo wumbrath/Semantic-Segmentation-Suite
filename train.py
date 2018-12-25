@@ -195,7 +195,7 @@ for epoch in range(args.epoch_start_i, args.num_epochs):
 
         # Do the training
         loss = tf.Print(loss, [loss], message="loss")
-        opt = tf.Print(opt, [opt], message="opt")
+        print(opt)
         _,current=sess.run([opt,loss],feed_dict={net_input:input_image_batch,net_output:output_image_batch})
         current_losses.append(current)
         cnt = cnt + args.batch_size
