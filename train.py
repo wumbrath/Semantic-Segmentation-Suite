@@ -194,8 +194,7 @@ for epoch in range(args.epoch_start_i, args.num_epochs):
             output_image_batch = np.squeeze(np.stack(output_image_batch, axis=1))
 
         # Do the training
-        loss = tf.Print(loss, [loss], message="loss")
-        print(opt)
+        print(loss)
         _,current=sess.run([opt,loss],feed_dict={net_input:input_image_batch,net_output:output_image_batch})
         current_losses.append(current)
         cnt = cnt + args.batch_size
