@@ -59,6 +59,7 @@ def TransitionUp(block_to_upsample, skip_connection, n_filters_keep, scope=None)
   with tf.name_scope(scope) as sc:
     # Upsample
     l = slim.conv2d_transpose(block_to_upsample, n_filters_keep, kernel_size=[3, 3], stride=[2, 2], activation_fn=None)
+    print(l)
     # Concatenate with skip connection
     l = tf.concat([l, skip_connection], axis=-1)
     return l
