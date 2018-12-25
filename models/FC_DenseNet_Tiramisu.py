@@ -127,6 +127,7 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
         skip_connection_list.append(stack)
 
         # Transition Down
+		print(skip_connection_list)
         stack = TransitionDown(stack, n_filters, dropout_p, scope='transitiondown%d'%(i+1))
 
       skip_connection_list = skip_connection_list[::-1]
@@ -147,6 +148,7 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
       for i in range(n_pool):
         # Transition Up ( Upsampling + concatenation with the skip connection)
         n_filters_keep = growth_rate * n_layers_per_block[n_pool + i]
+		print(skip_connection_list)
         stack = TransitionUp(block_to_upsample, skip_connection_list[i], n_filters_keep, scope='transitionup%d' % (n_pool + i + 1))
 
         # Dense Block
