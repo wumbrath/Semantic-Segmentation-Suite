@@ -59,7 +59,7 @@ def TransitionUp(block_to_upsample, skip_connection, n_filters_keep, scope=None)
   with tf.name_scope(scope) as sc:
     # Upsample
     l = slim.conv2d_transpose(block_to_upsample, n_filters_keep, kernel_size=[3, 3], stride=[2, 2], activation_fn=None)
-    print(l)
+
     # Concatenate with skip connection
     l = tf.concat([l, skip_connection], axis=-1)
     return l
@@ -128,7 +128,6 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
         skip_connection_list.append(stack)
 
         # Transition Down
-        print(skip_connection_list)
         stack = TransitionDown(stack, n_filters, dropout_p, scope='transitiondown%d'%(i+1))
 
       skip_connection_list = skip_connection_list[::-1]
@@ -149,7 +148,6 @@ def build_fc_densenet(inputs, num_classes, preset_model='FC-DenseNet56', n_filte
       for i in range(n_pool):
         # Transition Up ( Upsampling + concatenation with the skip connection)
         n_filters_keep = growth_rate * n_layers_per_block[n_pool + i]
-        print(skip_connection_list)
         stack = TransitionUp(block_to_upsample, skip_connection_list[i], n_filters_keep, scope='transitionup%d' % (n_pool + i + 1))
 
         # Dense Block
