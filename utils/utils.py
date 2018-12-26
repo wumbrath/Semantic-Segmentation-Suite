@@ -43,7 +43,7 @@ def prepare_data(dataset_dir):
 
 def load_image(path):
     try:
-        image = cv2.cvtColor(cv2.imread(path,-1), cv2.COLOR_BGR2RGB)
+        image = cv2.cvtColor(cv2.imread(path,1), cv2.COLOR_BGR2RGB)
     except:
         print(path)
         raise
