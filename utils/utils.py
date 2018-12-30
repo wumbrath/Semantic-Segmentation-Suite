@@ -41,12 +41,17 @@ def prepare_data(dataset_dir):
     train_input_names.sort(),train_output_names.sort(), val_input_names.sort(), val_output_names.sort(), test_input_names.sort(), test_output_names.sort()
     return train_input_names,train_output_names, val_input_names, val_output_names, test_input_names, test_output_names
 
+img_cache = {}
 def load_image(path):
     try:
-        image = cv2.cvtColor(cv2.imread(path,1), cv2.COLOR_BGR2RGB)
+        image = img_cache.get(path)
+        if image == None:
+            image = cv2.cvtColor(cv2.imread(path,1), cv2.COLOR_BGR2RGB)
+            img_cache[path] = image
     except:
         print(path)
         raise
+    print(img_cache)
     return image
 
 # Takes an absolute file path and returns the name of the file without th extension
