@@ -110,7 +110,7 @@ if 'COLAB_TPU_ADDR' in os.environ:
 else:
     sess.run(tf.global_variables_initializer())
 
-utils.count_params()
+#utils.count_params()
 
 # If a pre-trained ResNet is required, load the weights.
 # This must be done AFTER the variables are initialized with sess.run(tf.global_variables_initializer())
