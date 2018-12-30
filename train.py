@@ -25,7 +25,7 @@ def str2bool(v):
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
         return False
     else:
-        raise argparse.ArgumentTypeError('Boolean value expected.')
+        raise argparse.ArgumentTsypeError('Boolean value expected.')
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--num_epochs', type=int, default=300, help='Number of epochs to train for')
@@ -85,7 +85,12 @@ num_classes = len(label_values)
 
 config = tf.ConfigProto()
 config.gpu_options.allow_growth = True
-sess=tf.Session(config=config)
+
+if 'COLAB_TPU_ADDR' in os.environ:
+    tpu_address = 'grpc://' + os.environ['COLAB_TPU_ADDR']
+    sess=tf.Session(target=tpu_address, config=config)
+else:
+    sess=tf.Session(config=config)
 
 
 # Compute your softmax cross entropy loss
