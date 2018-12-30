@@ -51,7 +51,6 @@ def load_image(path):
     except:
         print(path)
         raise
-    print(img_cache)
     return image
 
 # Takes an absolute file path and returns the name of the file without th extension
