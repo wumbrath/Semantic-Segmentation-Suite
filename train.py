@@ -104,7 +104,11 @@ loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=network, la
 opt = tf.train.RMSPropOptimizer(learning_rate=0.0001, decay=0.995).minimize(loss, var_list=[var for var in tf.trainable_variables()])
 
 saver=tf.train.Saver(max_to_keep=1000)
-sess.run(tf.global_variables_initializer())
+if 'COLAB_TPU_ADDR' in os.environ:
+    sess.run([tf.global_variables_initializer(),tf.contrib.tpu.initialize_system()])
+    print(str(sess.list_devices()))
+else:
+    sess.run(tf.global_variables_initializer())
 
 utils.count_params()
 
