@@ -51,7 +51,8 @@ def load_image(path):
             if height > 400:
                 new_height = 400
                 new_width = math.floor(new_height*width/height)
-                image = cv2.resize(image, (new_width, new_height))
+                if new_width >= 160:
+                    image = cv2.resize(image, (new_width, new_height))
             img_cache[path] = image
     except:
         print(path)
