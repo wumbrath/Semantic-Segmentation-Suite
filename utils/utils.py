@@ -45,7 +45,7 @@ img_cache = {}
 def load_image(path):
     try:
         image = img_cache.get(path)
-        if image == None:
+        if image is None:
             image = cv2.cvtColor(cv2.imread(path,1), cv2.COLOR_BGR2RGB)
             height,width,bpp = np.shape(image)
             if height > 400:
