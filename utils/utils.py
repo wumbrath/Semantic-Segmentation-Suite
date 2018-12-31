@@ -44,16 +44,24 @@ def prepare_data(dataset_dir):
 img_cache = {}
 def load_image(path):
     try:
-        image = img_cache.get(path)
-        if image is None:
+        #image = img_cache.get(path)
+        #if image is None:
             image = cv2.cvtColor(cv2.imread(path,1), cv2.COLOR_BGR2RGB)
-            height,width,bpp = np.shape(image)
-            if height > 400:
-                new_height = 400
-                new_width = math.floor(new_height*width/height)
-                if new_width >= 160:
-                    image = cv2.resize(image, (new_width, new_height))
-            img_cache[path] = image
+        #    height,width,bpp = np.shape(image)
+        #    if height > 400:
+        #        new_height = 400
+        #        new_width = math.floor(new_height*width/height)
+        #        if new_width >= 160:
+        #            image = cv2.resize(image, (new_width, new_height))
+        #    img_cache[path] = image
+    except:
+        print(path)
+        raise
+    return image
+
+def load_image_unmodified(path):
+    try:
+        image = cv2.cvtColor(cv2.imread(path,1), cv2.COLOR_BGR2RGB)
     except:
         print(path)
         raise
